@@ -9,3 +9,7 @@ Proyecto Final del curso fullstack de IA Center
 ## Agregar archivo .env
 
 Agregar dentro del directorio inicial en el archivo ```.env``` con sus respectivos valores
+
+## Documentación
+
+[Documentacion en Postman](https://documenter.getpostman.com/view/16778320/UV5Ukz4T)
