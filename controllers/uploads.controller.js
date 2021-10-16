@@ -5,26 +5,35 @@ const { response } = require("express");
 
 const File = require('../models/file.model');
 
-const { uploadFileHelper } = require('../helpers/upload-file');
+const { uploadFilesHelper } = require('../helpers/upload-file');
 
-const uploadFile = async (req, res = response) => {
+const uploadFiles = async (req, res = response) => {
     try {
         const directory = 'files';
-        const fileName = await uploadFileHelper(req.files, undefined, directory);
+
+        let fileNames;
+        if (!Array.isArray(req.files.fileName)) {
+            fileNames = await uploadFilesHelper([req.files.fileName], undefined, directory);
+        } else {
+            fileNames = await uploadFilesHelper(req.files.fileName, undefined, directory);
+        }
+
         const pathName = process.env.HOST + ':' + process.env.PORT + '/api/uploads/' + directory + '/';
 
-        const file = new File({
-            fileName,
-            pathName,
-            user: req.user._id
+        let filesIn = [];
+
+        fileNames.forEach((name, index) => {
+            const fileN = new File({
+                fileName: name,
+                pathName,
+                user: req.user._id
+            });
+            fileN.createdAt;
+            filesIn[index] = fileN;
         });
+        File.insertMany(filesIn);
 
-        // Save in db
-        await file.save();
-
-        file.createdAt;
-
-        res.json(file);
+        res.json({ filesIn });
     } catch (msg) {
         res.status(400).json({ msg });
     }
@@ -94,7 +103,7 @@ const deleteFile = async (req, res = response) => {
 }
 
 module.exports = {
-    uploadFile,
+    uploadFiles,
     showFiles,
     returnFile,
     deleteFile

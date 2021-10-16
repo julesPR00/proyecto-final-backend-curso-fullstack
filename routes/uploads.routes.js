@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { uploadFile, showFiles, returnFile, deleteFile } = require('../controllers/uploads.controller');
+const { uploadFiles, showFiles, returnFile, deleteFile } = require('../controllers/uploads.controller');
 
 const { validateFileUpload } = require('../middlewares/file-validator');
 const { validateJWT } = require('../middlewares/jwt-validator');
@@ -12,7 +12,7 @@ const router = Router();
 router.post('/', [
     validateFileUpload,
     validateJWT
-], uploadFile);
+], uploadFiles);
 
 // Get files
 router.get('/', showFiles);
