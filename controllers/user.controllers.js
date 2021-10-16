@@ -63,6 +63,7 @@ const usersDelete = async (req = request, res = response) => {
 
     res.json(user);
 }
+
 module.exports = {
     usersGet,
     usersPost,

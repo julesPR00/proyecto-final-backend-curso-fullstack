@@ -40,6 +40,7 @@ class Server {
 
         // Public directory
         this.app.use(express.static('public'));
+        // this.app.use(express.static('uploads'));
 
         // Fileupload
         this.app.use(fileUpload({
@@ -57,7 +58,7 @@ class Server {
 
     listen() {
         this.app.listen(this.port, () => {
-            console.log('Server running in port', process.env.PORT);
+            console.log('Server running on port', process.env.PORT);
         })
     }
 }

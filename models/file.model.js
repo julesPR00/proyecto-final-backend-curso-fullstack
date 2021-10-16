@@ -3,7 +3,11 @@ const { Schema, model } = require('mongoose');
 const FileSchema = Schema({
     fileName: {
         type: String,
-        required: [true, 'fileName required'],
+        required: [true, 'fileName required']
+    },
+    pathName: {
+        type: String,
+        required: [true, 'path required']
     },
     user: {
         type: Schema.Types.ObjectId,
