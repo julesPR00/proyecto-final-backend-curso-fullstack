@@ -8,7 +8,7 @@ const uploadFileHelper = (files, validExtensions = ['jpg', 'jpeg', 'png', 'xlsx'
 
         // Validate extension
         if (!validExtensions.includes(extension.toLowerCase())) {
-            return reject(`Extension ${extension} not valid - ${validExtensions}`);
+            return reject(`Invalid extension ${extension} - ${validExtensions}`);
         }
 
         const today = new Date();

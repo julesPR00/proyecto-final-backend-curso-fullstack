@@ -5,15 +5,16 @@ const FileSchema = Schema({
         type: String,
         required: [true, 'fileName required'],
     },
-    path: {
-        type: String
-    },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'user',
         required: true
     }
-}, { timestamps: true });
+}, {
+    timestamps: {
+        createdAt: true, updatedAt: false
+    }
+});
 
 FileSchema.methods.toJSON = function () {
     const { __v, ...data } = this.toObject();

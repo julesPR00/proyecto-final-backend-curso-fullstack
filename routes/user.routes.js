@@ -37,7 +37,7 @@ router.put('/:id', [
 // Delete user  - change state
 router.delete('/:id', [
     validateJWT,
-    hasRole('USER_ROLE', 'ADMIN_ROLE'),
+    hasRole('ADMIN_ROLE'),
     check('id', 'Invalid ID').isMongoId(),
     check('id').custom(existsUserById),
     validateFields
