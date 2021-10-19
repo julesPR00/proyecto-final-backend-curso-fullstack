@@ -41,16 +41,24 @@ const uploadFiles = async (req, res = response) => {
 
 const showFiles = async (req, res = response) => {
     const { limit = 15, from = 0 } = req.query;
-    const [total, files] = await Promise.all([
-        File.countDocuments(),
-        File.find()
-            .skip(Number(from))
-            .limit(Number(limit))
-    ]);
+    const files = await File.find()
+        .skip(Number(from))
+        .limit(Number(limit))
+
+    let existingFilesInServer = [];
+
+    files.forEach(file => {
+        const fileName = file.fileName;
+
+        const pathFile = path.join(__dirname, '../uploads/files/', fileName);
+        if (fs.existsSync(pathFile)) {
+            existingFilesInServer.push(file);
+        }
+    });
 
     res.json({
-        total,
-        files
+        total: existingFilesInServer.length,
+        files: existingFilesInServer
     });
 }
 

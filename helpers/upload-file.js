@@ -3,8 +3,8 @@ const path = require('path');
 const uploadFilesHelper = (files, validExtensions = ['jpg', 'jpeg', 'png', 'xlsx', 'docx', 'csv', 'pdf', 'gif'], directory = '') => {
     return new Promise((resolve, reject) => {
         let fileNames = [];
-   
-        files.forEach((file, index) => {
+
+        files.forEach(file => {
             const nameSplit = file.name.split('.');
             const extension = nameSplit[nameSplit.length - 1];
 
@@ -25,7 +25,7 @@ const uploadFilesHelper = (files, validExtensions = ['jpg', 'jpeg', 'png', 'xlsx
                     return reject(err);
                 }
             });
-            fileNames[index] = tempName;
+            fileNames.push(tempName);
         });
 
         resolve(fileNames);
