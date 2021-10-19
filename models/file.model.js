@@ -5,10 +5,10 @@ const FileSchema = Schema({
         type: String,
         required: [true, 'fileName required']
     },
-    pathName: {
-        type: String,
-        required: [true, 'path required']
-    },
+    // pathName: {
+    //     type: String,
+    //     required: [true, 'path required']
+    // },
     user: {
         type: Schema.Types.ObjectId,
         ref: 'user',

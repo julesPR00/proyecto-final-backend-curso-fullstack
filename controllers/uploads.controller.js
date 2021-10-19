@@ -18,14 +18,14 @@ const uploadFiles = async (req, res = response) => {
             fileNames = await uploadFilesHelper(req.files.fileName, undefined, directory);
         }
 
-        const pathName = process.env.HOST + ':' + process.env.PORT + '/api/uploads/' + directory + '/';
+        // const pathName = process.env.HOST + ':' + process.env.PORT + '/api/uploads/' + directory + '/';
 
         let filesIn = [];
 
         fileNames.forEach((name, index) => {
             const fileN = new File({
                 fileName: name,
-                pathName,
+                // pathName,
                 user: req.user._id
             });
             fileN.createdAt;
@@ -40,7 +40,7 @@ const uploadFiles = async (req, res = response) => {
 }
 
 const showFiles = async (req, res = response) => {
-    const { limit = 50, from = 0 } = req.query;
+    const { limit = 15, from = 0 } = req.query;
     const [total, files] = await Promise.all([
         File.countDocuments(),
         File.find()
@@ -54,26 +54,26 @@ const showFiles = async (req, res = response) => {
     });
 }
 
-const returnFile = async (req, res = response) => {
-    const { fileName } = req.params;
+// const returnFile = async (req, res = response) => {
+//     const { fileName } = req.params;
 
-    const fileEx = await File.find({ fileName });
+//     const fileEx = await File.find({ fileName });
 
-    if (!fileEx) {
-        return res.status(400).json({
-            msg: `File ${fileName} does not exist in db`
-        });
-    }
+//     if (!fileEx) {
+//         return res.status(400).json({
+//             msg: `File ${fileName} does not exist in db`
+//         });
+//     }
 
-    const pathFile = path.join(__dirname, '../uploads/files/', fileName);
-    if (fs.existsSync(pathFile)) {
-        return res.sendFile(pathFile);
-    }
+//     const pathFile = path.join(__dirname, '../uploads/files/', fileName);
+//     if (fs.existsSync(pathFile)) {
+//         return res.sendFile(pathFile);
+//     }
 
-    return res.status(400).json({
-        msg: `Cannot find file ${fileName} on server`
-    });
-}
+//     return res.status(400).json({
+//         msg: `Cannot find file ${fileName} on server`
+//     });
+// }
 
 const deleteFile = async (req, res = response) => {
     const { fileName } = req.params;
@@ -105,6 +105,6 @@ const deleteFile = async (req, res = response) => {
 module.exports = {
     uploadFiles,
     showFiles,
-    returnFile,
+    // returnFile,
     deleteFile
 }

@@ -40,7 +40,7 @@ class Server {
 
         // Public directory
         this.app.use(express.static('public'));
-        // this.app.use(express.static('uploads'));
+        this.app.use('/uploads', express.static('uploads/files'));
 
         // Fileupload
         this.app.use(fileUpload({
