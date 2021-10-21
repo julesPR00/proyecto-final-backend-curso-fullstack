@@ -33,7 +33,9 @@ class Server {
 
     middlewares() {
         // CORS
-        this.app.use(cors());
+        this.app.use(cors({
+            origin: process.env.CORS_ORIGINS.split(',')
+        }));
 
         // Body lecture and parser
         this.app.use(express.json());
@@ -46,7 +48,11 @@ class Server {
         this.app.use(fileUpload({
             useTempFiles: true,
             tempFileDir: '/tmp/',
-            createParentPath: true
+            createParentPath: true,
+            // limits: { 
+            //     fieldSize: 1 * 1024 * 1024,
+            //     // fileSize: 5 * 1024 * 1024
+            //  }
         }));
     }
 
