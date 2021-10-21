@@ -34,7 +34,7 @@ class Server {
     middlewares() {
         // CORS
         this.app.use(cors({
-            origin: process.env.CORS_ORIGINS.split(',')
+            origin: '*'
         }));
 
         // Body lecture and parser
@@ -49,10 +49,10 @@ class Server {
             useTempFiles: true,
             tempFileDir: '/tmp/',
             createParentPath: true,
-            // limits: { 
-            //     fieldSize: 1 * 1024 * 1024,
-            //     // fileSize: 5 * 1024 * 1024
-            //  }
+            limits: { 
+                fieldSize: 10 * 1024 * 1024,
+                fileSize: 10 * 1024 * 1024
+             }
         }));
     }
 
