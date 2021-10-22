@@ -62,26 +62,26 @@ const showFiles = async (req, res = response) => {
     });
 }
 
-// const returnFile = async (req, res = response) => {
-//     const { fileName } = req.params;
+const returnFile = async (req, res = response) => {
+    const { fileName } = req.params;
 
-//     const fileEx = await File.find({ fileName });
+    const fileEx = await File.find({ fileName });
 
-//     if (!fileEx) {
-//         return res.status(400).json({
-//             msg: `File ${fileName} does not exist in db`
-//         });
-//     }
+    if (!fileEx) {
+        return res.status(400).json({
+            msg: `File ${fileName} does not exist in db`
+        });
+    }
 
-//     const pathFile = path.join(__dirname, '../uploads/files/', fileName);
-//     if (fs.existsSync(pathFile)) {
-//         return res.sendFile(pathFile);
-//     }
+    const pathFile = path.join(__dirname, '../uploads/files/', fileName);
+    if (fs.existsSync(pathFile)) {
+        return res.download(pathFile);
+    }
 
-//     return res.status(400).json({
-//         msg: `Cannot find file ${fileName} on server`
-//     });
-// }
+    return res.status(400).json({
+        msg: `Cannot find file ${fileName} on server`
+    });
+}
 
 const deleteFile = async (req, res = response) => {
     const { fileName } = req.params;
@@ -113,6 +113,6 @@ const deleteFile = async (req, res = response) => {
 module.exports = {
     uploadFiles,
     showFiles,
-    // returnFile,
+    returnFile,
     deleteFile
 }
