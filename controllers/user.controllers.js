@@ -56,10 +56,10 @@ const usersDelete = async (req = request, res = response) => {
     const { id } = req.params;
 
     // Delete entirely from db
-    // const user = await User.findByIdAndDelete(id);
+    const user = await User.findByIdAndDelete(id);
 
     // Change state
-    const user = await User.findByIdAndUpdate(id, { state: false });
+    // const user = await User.findByIdAndUpdate(id, { state: false });
 
     res.json(user);
 }

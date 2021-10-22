@@ -8,7 +8,7 @@ Proyecto Final del curso fullstack de IA Center
 
 ## Agregar archivo .env
 
-Agregar dentro del directorio inicial en el archivo ```.env``` con sus respectivos valores
+Agregar dentro del directorio inicial en el archivo ```.env``` con sus respectivos valores, ejemplo en ```.example.env```
 
 ## Documentación
 
